@@ -3,26 +3,42 @@
 {% block title %}Long Distance TAXI - Home{% endblock %}
 
 {% block content %}
-    <style>
-        .bar {
-            text-align: center;
-        }
+<style>
+    .bar {
+        text-align: center;
+    }
 
-    </style>
+    select[name="from_location"],
+    select[name="to_location"] {
+        min-height: 40px;
+    }
 
-    <body>
+    /* Style for the input field */
+    input[type="date"] {
+        font-size: 16px; /* Adjust the font size */
+    }
 
-        <div class="bar">
-        <h1>Long Distance TAXI</h1>
-        <p>Please select the options below to search for your trip...</p>
-        </div>
+    /* Style for the date picker dropdown */
+    input[type="date"]::-webkit-calendar-picker-indicator {
+        font-size: 16px; /* Adjust the font size */
+        padding: 4px; /* Adjust padding to increase clickable area */
+    }
 
-    <form method="get" action="{% url 'search_index' %}">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Search</button>
-    </form>
+</style>
 
-    </body>
+<body>
+
+<div class="bar">
+    <h1>Long Distance TAXI</h1>
+    <p>Please select the options below to search for your trip...</p>
+</div>
+
+<form action="{% url 'search_index' %}" method="get">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Search</button>
+</form>
+
+</body>
 
 {% endblock %}
