@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0">
+    <title>{% block title %}Long Distance TAXI{% endblock %}</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+    }
+
+    main {
+        padding: 20px;
+    }
+
+    form {
+        max-width: 600px;
+        margin: 0 auto;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+    }
+
+    select,
+    input,
+    button {
+        width: calc(100% - 30px); /* Adjusted width to accommodate icon */
+        padding: 10px;
+        margin-bottom: 10px;
+        box-sizing: border-box;
+    }
+
+
+    button {
+        background-color: #333;
+        color: #fff;
+        border: none;
+        padding: 15px;
+        cursor: pointer;
+    }
+
+    .exchange-button i {
+        font-size: 24px;
+        display: block;
+        transform: rotate(90deg); /* Rotate the icon 90 degrees */
+    }
+
+    .icon-bar {
+        width: 100%;
+        background-color: #555;
+        overflow: auto;
+        position: fixed;
+        bottom: 0;
+    }
+
+    .icon-bar a {
+        float: left;
+        width: 33.3333%;
+        text-align: center;
+        padding: 12px 0;
+        transition: all 0.3s ease;
+        color: white;
+        font-size: 20px;
+        text-decoration: none;
+        display: block;
+    }
+
+    .icon-bar i {
+        margin-bottom: 5px;
+    }
+
+    .icon-bar a:hover {
+        background-color: #000;
+    }
+
+    .icon-bar .active {
+        background-color: #04aa6d;
+    }
+
+    .icon-bar span {
+        display: block;
+        font-size: 12px;
+    }
+
+</style>
+<body>
+<header>
+    <div class="icon-bar">
+        <a href="{% url 'user' %}">
+            <i class="fa fa-fw fa-user"></i>
+            <span>User</span>
+        </a>
+        <a class="active" href="{% url 'search_index' %}">
+            <i class="fa fa-home"></i>
+            <span>Home</span>
+        </a>
+        <a href="{% url 'driver' %}">
+            <i class="fa fa-car"></i>
+            <span>Driver</span>
+        </a>
+    </div>
+</header>
+
+<main>
+    {% block content %}{% endblock %}
+</main>
+
+<footer>
+    <!-- Your footer content here -->
+</footer>
+</body>
+</html>

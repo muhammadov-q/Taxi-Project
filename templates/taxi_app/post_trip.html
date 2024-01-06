@@ -1,0 +1,79 @@
+{% extends 'taxi_app/master.html' %}
+
+{% block title %}Post Taxi Trip{% endblock %}
+
+{% block content %}
+    <style>
+        h1 {
+            text-align: center;
+        }
+
+        select[name="from_location"],
+        select[name="to_location"] {
+            min-height: 40px;
+        }
+
+        /* Style for the input field */
+        input[type="date"] {
+            font-size: 16px; /* Adjust the font size */
+        }
+
+        /* Style for the date picker dropdown */
+        input[type="date"]::-webkit-calendar-picker-indicator {
+            font-size: 16px; /* Adjust the font size */
+            padding: 4px; /* Adjust padding to increase clickable area */
+        }
+
+    </style>
+
+    <body>
+    <h1>Post Taxi Trip</h1>
+    <form method="post">
+        {% csrf_token %}
+
+        <div class="input-container">
+            <i class="fa fa-map-marker location-icon"></i>
+            <label for="{{ form.from_location.id_for_label }}">From:</label>
+            {{ form.from_location }}
+        </div>
+
+        <div class="input-container">
+            <i class="fa fa-map-marker location-icon"></i>
+            <label for="{{ form.to_location.id_for_label }}">To:</label>
+            {{ form.to_location }}
+        </div>
+
+        <div>
+            <label for="{{ form.date.id_for_label }}">Date:</label>
+            {{ form.date }}
+        </div>
+
+        <div>
+            <label for="{{ form.time.id_for_label }}">Time:</label>
+            {{ form.time }}
+        </div>
+
+        <div>
+            <label for="{{ form.price.id_for_label }}">Price:</label>
+            {{ form.price }}
+        </div>
+
+        <div>
+            <label for="{{ form.available_seats.id_for_label }}">Available Seats:</label>
+            {{ form.available_seats }}
+        </div>
+
+        <div>
+            <label for="{{ form.comments.id_for_label }}">Comment:</label>
+            {{ form.comments }}
+        </div>
+
+        <button type="submit">Post</button>
+    </form>
+
+    {% if post_result %}
+        <p>{{ post_result }}</p>
+    {% endif %}
+
+    </body>
+{% endblock %}

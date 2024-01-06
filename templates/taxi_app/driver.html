@@ -1,0 +1,22 @@
+{% extends 'taxi_app/master.html' %}
+
+{% block title %} Driver Profile {% endblock %}
+
+{% block content %}
+
+    <style>
+        body {
+            text-align: center;
+        }
+    </style>
+
+    <body>
+    <h1> Hello driver</h1>
+    <a href="{% url 'post_trip' %}">
+        <button type="button">Post</button>
+    </a>
+
+    <button type="button">Edit Profile</button>
+    <button type="button">Requests</button>
+    </body>
+{% endblock %}

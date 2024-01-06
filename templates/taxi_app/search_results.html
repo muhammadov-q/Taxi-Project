@@ -1,0 +1,93 @@
+{% extends 'taxi_app/master.html' %}
+
+{% block content %}
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Search Results</title>
+        <style>
+            body {
+                font-family: 'Arial', sans-serif;
+                background-color: #f4f4f4;
+                color: #333;
+                text-align: center;
+            }
+
+            h1 {
+                color: #0066cc;
+            }
+
+            h2 {
+                background-color: #0066cc;
+                color: #fff;
+                padding: 10px;
+                border-radius: 5px;
+            }
+
+            h2 strong {
+                color: #ffcc00;
+            }
+
+            ul {
+                list-style-type: none;
+                padding: 0;
+                text-align: center; /* Center the content horizontally */
+            }
+
+            li {
+                background-color: #fff;
+                border: 1px solid #ddd;
+                margin: 10px auto; /* Center the element horizontally */
+                padding: 15px;
+                max-width: 50%;
+                border-radius: 5px;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                transition: transform 0.3s ease-in-out;
+            }
+
+            li:hover {
+                transform: scale(1.05);
+            }
+
+            a {
+                color: #0066cc;
+                text-decoration: none;
+                font-weight: bold;
+            }
+        </style>
+    </head>
+    <body>
+
+    <h1>Search Results</h1>
+
+    {% if matching_posts %}
+        <h2>
+            {{ matching_posts.0.from_location }}
+            <strong>-</strong> {{ matching_posts.0.to_location }},
+            <strong>
+            {{ matching_posts.0.date }}
+                <strong>
+        </h2>
+
+        <ul>
+            {% for post in matching_posts %}
+                <li>
+                    <strong>Time:</strong> {{ post.time|time:"H:i" }},
+                    <strong>Price:</strong> {{ post.price }},
+                    <strong>Available Seats:</strong> {{ post.available_seats }},
+                    <strong>Comment:</strong> {{ post.comments|default:"No comment" }}
+                </li>
+                <br> <!-- Add a line break after each post -->
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No matching trips found.</p>
+    {% endif %}
+
+    <a href="{% url 'search_index' %}">Back to Search</a>
+
+    </body>
+    </html>
+
+{% endblock %}

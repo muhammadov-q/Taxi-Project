@@ -1,0 +1,28 @@
+{% extends 'taxi_app/master.html' %}
+
+{% block title %}Long Distance TAXI - Home{% endblock %}
+
+{% block content %}
+    <style>
+        .bar {
+            text-align: center;
+        }
+
+    </style>
+
+    <body>
+
+        <div class="bar">
+        <h1>Long Distance TAXI</h1>
+        <p>Please select the options below to search for your trip...</p>
+        </div>
+
+    <form method="get" action="{% url 'search_index' %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Search</button>
+    </form>
+
+    </body>
+
+{% endblock %}
