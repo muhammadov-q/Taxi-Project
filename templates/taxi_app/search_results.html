@@ -73,6 +73,7 @@
         <ul>
             {% for post in matching_posts %}
                 <li>
+                    <strong>Posted by:</strong> {{ post.user.first_name }} {{ post.user.last_name }},
                     <strong>Time:</strong> {{ post.time|time:"H:i" }},
                     <strong>Price:</strong> {{ post.price }},
                     <strong>Available Seats:</strong> {{ post.available_seats }},

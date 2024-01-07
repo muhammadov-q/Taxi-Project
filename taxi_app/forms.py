@@ -1,6 +1,24 @@
 from django import forms
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+from django.contrib.auth.models import User
 
 from .models import TaxiPost
+
+
+class CustomAuthenticationForm(AuthenticationForm):
+    username = forms.CharField(label='Phone Number', widget=forms.TextInput(attrs={'type': 'tel'}))
+
+
+class RegistrationForm(UserCreationForm):
+    first_name = forms.CharField(max_length=30)
+    last_name = forms.CharField(max_length=30)
+    phone_number = forms.CharField(max_length=15, widget=forms.TextInput(attrs={'type': 'tel'}))
+    car_type = forms.CharField(max_length=50)
+
+    class Meta:
+        model = User
+        fields = ['first_name', 'last_name', 'phone_number', 'car_type', 'password1', 'password2']
+
 
 CITIES_CHOICES = [
     ("Tashkent", "Tashkent"),

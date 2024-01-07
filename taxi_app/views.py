@@ -1,8 +1,54 @@
+from django.contrib.auth import login
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 from .forms import *
+from .forms import CustomAuthenticationForm, RegistrationForm
 from .models import TaxiPost
+
+
+@login_required
+def driver_dashboard(request):
+    user = request.user
+    return render(request, 'taxi_app/driver/driver_dashboard.html', {'user': user})
+
+
+def login_view(request):
+    if request.method == 'POST':
+        form = CustomAuthenticationForm(request, request.POST)
+        if form.is_valid():
+            user = form.get_user()
+            login(request, user)
+            # Redirect to a success page or homepage
+            return redirect('driver_dashboard')  # Update 'home' with the name of your homepage URL
+    else:
+        form = CustomAuthenticationForm(request)
+
+    return render(request, 'taxi_app/driver/login.html', {'form': form})
+
+
+def register_view(request):
+    if request.method == 'POST':
+        form = RegistrationForm(request.POST)
+        if form.is_valid():
+            phone_number = form.cleaned_data['phone_number']
+
+            # Check if a user with the given phone number already exists
+            if User.objects.filter(username=phone_number).exists():
+                form.add_error('phone_number', 'This phone number is already registered.')
+                return render(request, 'taxi_app/driver/register.html', {'form': form})
+
+            user = form.save(commit=False)
+            user.username = phone_number
+            user.save()
+            login(request, user)
+            # Redirect to a success page or homepage
+            return redirect('login')  # Update 'home' with the name of your homepage URL
+    else:
+        form = RegistrationForm()
+
+    return render(request, 'taxi_app/driver/register.html', {'form': form})
 
 
 def search_index(request):
@@ -51,18 +97,19 @@ def search_results(request):
     return HttpResponse("Invalid request method.")
 
 
+@login_required
 def post_trip(request):
     if request.method == 'POST':
         form = TaxiPostForm(request.POST)
         if form.is_valid():
-            # Save the form data to the database
+            # Associate the post with the current user
             post = form.save(commit=False)
+            post.user = request.user
             post.save()
             return render(request, 'taxi_app/post_trip.html', {'form': form, 'post_result': 'Post successful!'})
         else:
             # Form is not valid, print errors for debugging
             print(form.errors)
-
     else:
         form = TaxiPostForm()
 

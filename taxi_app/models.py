@@ -1,7 +1,13 @@
 from django.db import models
+from django.contrib.auth import get_user_model
+
+
+def get_default_user():
+    return get_user_model().objects.get_or_create(username='default_user')[0]
 
 
 class TaxiPost(models.Model):
+    user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, default=get_default_user)
     from_location = models.CharField(max_length=100)
     to_location = models.CharField(max_length=100)
     date = models.DateField()
