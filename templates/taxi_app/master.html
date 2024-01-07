@@ -2,16 +2,15 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1.0" name="viewport">
     <title>{% block title %}Long Distance TAXI{% endblock %}</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 </head>
 
 <style>
     body {
         margin: 0;
         padding: 0;
-        background-color: #7c7c7c;
     }
 
     main {
@@ -90,9 +89,36 @@
         font-size: 12px;
     }
 
+    .navbar {
+        background-color: #555;
+        color: white;
+        padding: 12px 0;
+        text-align: center;
+        position: relative;
+    }
+
+    .logo {
+        font-size: 24px;
+        font-weight: bold;
+    }
+
+    .notifications {
+        position: absolute;
+        left: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: white;
+        font-size: 20px;
+    }
+
 </style>
 <body>
 <header>
+
+    <div class="navbar">
+        <div class="notifications">&#x1F514;</div>
+        <div class="logo">LOGO</div>
+    </div>
     <div class="icon-bar">
         <a href="{% url 'user' %}">
             <i class="fa fa-fw fa-user"></i>
