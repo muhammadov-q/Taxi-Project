@@ -71,8 +71,8 @@ def post_trip(request):
 
 
 def user(request):
-    return render(request, 'taxi_app/user.html')
+    return render(request, 'taxi_app/user/user.html')
 
 
 def driver(request):
-    return render(request, 'taxi_app/driver.html')
+    return render(request, 'taxi_app/driver/main.html')

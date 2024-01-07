@@ -1,0 +1,46 @@
+{% extends 'taxi_app/master.html' %}
+
+{% block content %}
+
+    <style>
+        h1 {
+            text-align: center;
+            margin-top: 10%;
+        }
+
+        .button-container {
+            margin-top: 20px;
+            text-align: center;
+            padding: 50px;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            text-align: center;
+            text-decoration: none;
+            background-color: #4caf50;
+            color: white;
+            border-radius: 5px;
+            margin: 0 10px;
+            cursor: pointer;
+        }
+
+        .button.login {
+            background-color: #3498db;
+        }
+    </style>
+
+<body>
+
+    <h1>If you are driver please choose the options below.</h1>
+
+    <div class="button-container">
+        <a href="/login" class="button login">Login</a>
+        <a href="/register" class="button">Register</a>
+    </div>
+
+</body>
+
+{% endblock %}
