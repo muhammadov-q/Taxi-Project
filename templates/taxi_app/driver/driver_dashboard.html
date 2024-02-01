@@ -14,4 +14,22 @@
 <button type="button">Edit Profile</button>
 <button type="button">Requests</button>
 
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li %} %} class="{{ message.tags }}" endif if message.tags {% {%>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+
+<script>
+    // Automatically hide messages after 3 seconds
+    setTimeout(function () {
+        var messages = document.querySelector('.messages');
+        if (messages) {
+            messages.style.display = 'none';
+        }
+    }, 3000);
+</script>
+
 {% endblock %}

@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
@@ -106,7 +107,11 @@ def post_trip(request):
             post = form.save(commit=False)
             post.user = request.user
             post.save()
-            return render(request, 'taxi_app/post_trip.html', {'form': form, 'post_result': 'Post successful!'})
+
+            # Add success message
+            messages.success(request, 'Post successful!')
+
+            return redirect('driver_dashboard')  # Redirect to the driver dashboard
         else:
             # Form is not valid, print errors for debugging
             print(form.errors)
